@@ -50,14 +50,16 @@ function buildPlots() {
         title: `Sample Values and OTU ID for Subject ${name}`
     };
 
+    let array2 = data.samples.filter(d => d.id == name)[0];
+
     let graph2 = {
-        x: data.samples[0].otu_ids,
-        y: data.samples[0].sample_values,
+        x: array2.otu_ids,
+        y: array2.sample_values,
         mode: 'markers',
-        text:  data.samples[0].otu_labels,
+        text:  array2.otu_labels,
         marker: {
-            size: data.samples[0].sample_values,
-            color: data.samples[0].otu_ids
+            size: array2.sample_values,
+            color: array2.otu_ids
         }
 
     };
@@ -72,13 +74,13 @@ function buildPlots() {
     Plotly.newPlot('bar', graph, layout);
     Plotly.newPlot('bubble', [graph2], layout2);
 
-    let array2 = data.metadata.filter(d => d.id == name)[0];
+    let array3 = data.metadata.filter(d => d.id == name)[0];
 
     let table = d3.select("#sample-metadata");
 
     table.html("");
 
-    Object.entries(array2).forEach((key) => {   
+    Object.entries(array3).forEach((key) => {   
         table.append("h6").text(key[0] + ": " + key[1] + "\n");    
     });
 });
