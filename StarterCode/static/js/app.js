@@ -50,7 +50,29 @@ function buildPlots() {
         title: `Sample Values and OTU ID for Subject ${name}`
     };
 
+    let graph2 = {
+        x: data.samples[0].otu_ids,
+        y: data.samples[0].sample_values,
+        mode: 'markers',
+        text:  data.samples[0].otu_labels,
+        marker: {
+            size: data.samples[0].sample_values,
+            color: data.samples[0].otu_ids
+        }
+
+    };
+
+    console.log(data.samples);
+
+    let layout2 = {
+        xaxis:{title: 'OTU IDs'},
+        height: 600,
+        width: 1100
+    };
+
+    
     Plotly.newPlot('bar', graph, layout);
+    Plotly.newPlot('bubble', [graph2], layout2);
 
     }
     );
