@@ -62,8 +62,6 @@ function buildPlots() {
 
     };
 
-    console.log(data.samples);
-
     let layout2 = {
         xaxis:{title: 'OTU IDs'},
         height: 600,
@@ -74,8 +72,18 @@ function buildPlots() {
     Plotly.newPlot('bar', graph, layout);
     Plotly.newPlot('bubble', [graph2], layout2);
 
-    }
-    );
+    let array2 = data.metadata.filter(d => d.id == name)[0];
+
+    let table = d3.select("#sample-metadata");
+
+    table.html("");
+
+    Object.entries(array2).forEach((key) => {   
+        table.append("h6").text(key[0] + ": " + key[1] + "\n");    
+    });
+});
+
+
 }
 
 buildPlots()
